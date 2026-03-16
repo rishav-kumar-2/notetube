@@ -1,0 +1,7 @@
+@"
+node_modules
+.env
+.env.local
+*.log
+.railway
+"@ | Out-File -FilePath "C:\Users\PC\OneDrive\Desktop\you_note_AI\server\.gitignore" -Encoding utf8
