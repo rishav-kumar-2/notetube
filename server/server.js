@@ -80,10 +80,10 @@ const startServer = async () => {
     await sequelize.sync({ alter: true });
     console.log("All models synced");
 
-    const PORT = process.env.PORT ?? 5000;
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
+    const PORT = process.env.PORT ?? 8080;
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});
   } catch (error) {
     console.error("Error starting server:", error.message);
     process.exit(1);
