@@ -69,6 +69,7 @@ export default function Dashboard() {
       <Navbar />
 
       <div
+        className="dash-container"
         style={{
           maxWidth: "860px",
           margin: "0 auto",
@@ -104,7 +105,7 @@ export default function Dashboard() {
           }}
         >
           <form onSubmit={handleSubmit}>
-            <div style={{ display: "flex", gap: "10px" }}>
+            <div className="dash-input-row" style={{ display: "flex", gap: "10px" }}>
               {/* Input wrapper */}
               <div style={{ flex: 1, position: "relative" }}>
                 <Link2
@@ -270,6 +271,7 @@ export default function Dashboard() {
             </div>
 
             <div
+              className="dash-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
@@ -280,12 +282,13 @@ export default function Dashboard() {
                 <div
                   key={video.id}
                   onClick={() => navigate(`/summary/${video.id}`)}
+                  className="dash-card"
                   style={{
-                    background: "#fff",
+                    background: t.bgCard,
                     borderRadius: "16px",
                     padding: "16px",
                     cursor: "pointer",
-                    boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+                    boxShadow: t.shadowCard,
                     transition: "transform 0.15s, box-shadow 0.15s",
                     position: "relative",
                   }}
@@ -322,7 +325,7 @@ export default function Dashboard() {
                     style={{
                       fontSize: "13px",
                       fontWeight: 700,
-                      color: "#0a0a0a",
+                      color: t.text,
                       marginBottom: "4px",
                       display: "-webkit-box",
                       WebkitLineClamp: 2,
@@ -390,11 +393,11 @@ export default function Dashboard() {
         {recentVideos.length === 0 && !loading && (
           <div
             style={{
-              background: "#fff",
+              background: t.bgCard,
               borderRadius: "20px",
               padding: "64px 24px",
               textAlign: "center",
-              boxShadow: "0 2px 16px rgba(0,0,0,0.05)",
+              boxShadow: t.shadow,
             }}
           >
             <div
@@ -402,8 +405,8 @@ export default function Dashboard() {
                 width: "52px",
                 height: "52px",
                 borderRadius: "14px",
-                background: "#f7f7f7",
-                border: "1.5px solid #f0f0f0",
+                background: t.bgSecondary,
+                border: `1.5px solid ${t.border}`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -416,13 +419,13 @@ export default function Dashboard() {
               style={{
                 fontSize: "15px",
                 fontWeight: 700,
-                color: "#0a0a0a",
+                color: t.text,
                 marginBottom: "6px",
               }}
             >
               No summaries yet
             </h3>
-            <p style={{ fontSize: "13px", color: "#aaa", fontWeight: 400 }}>
+            <p style={{ fontSize: "13px", color: t.textMuted, fontWeight: 400 }}>
               Paste a YouTube URL above to get started
             </p>
           </div>
@@ -433,6 +436,14 @@ export default function Dashboard() {
         @keyframes bounce {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-5px); }
+        }
+        @media (max-width: 768px) {
+          .dash-container { padding: 24px 16px !important; }
+          .dash-input-row { flex-direction: column !important; }
+          .dash-input-row button { width: 100% !important; }
+          .dash-grid { grid-template-columns: 1fr !important; }
+          .dash-card { min-width: 0 !important; }
+          .delete-btn { opacity: 1 !important; }
         }
       `}</style>
     </div>
