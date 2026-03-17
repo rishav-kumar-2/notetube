@@ -7,7 +7,8 @@ const {
   updateNotes,
   deleteVideo,
 } = require("../controllers/videoController");
-const authenticate = require("../middleware/authMiddleware");
+const authenticate = require("../middleware/authmiddleware");
+
 
 // All video routes are protected
 router.use(authenticate);
