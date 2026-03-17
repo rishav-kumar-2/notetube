@@ -20,64 +20,50 @@ const LinkedInIcon = () => (
 );
 
 export default function Footer() {
-  const { t, isDark } = useTheme();
+  const { t } = useTheme();
 
   const footerLinks = [
     {
       heading: "Product",
       links: [
-        { label: "Dashboard",   to: "/dashboard" },
-        { label: "History",     to: "/history" },
-        { label: "Pricing",     to: "/pricing" },
-        { label: "Contact",     to: "/contact" },
+        { label: "Dashboard", to: "/dashboard" },
+        { label: "History",   to: "/history" },
+        { label: "Pricing",   to: "/pricing" },
+        { label: "Contact",   to: "/contact" },
       ],
     },
     {
       heading: "Company",
       links: [
-        { label: "About",       to: "/about" },
-        { label: "Blog",        to: "/blog" },
-        { label: "Careers",     to: "/careers" },
-        { label: "Press",       to: "/press" },
+        { label: "About",    to: "/about" },
+        { label: "Blog",     to: "/blog" },
+        { label: "Careers",  to: "/careers" },
+        { label: "Press",    to: "/press" },
       ],
     },
     {
       heading: "Legal",
       links: [
-        { label: "Privacy Policy",    to: "/privacy" },
-        { label: "Terms of Service",  to: "/terms" },
-        { label: "Cookie Policy",     to: "/cookies" },
-        { label: "Security",          to: "/security" },
+        { label: "Privacy Policy",   to: "/privacy" },
+        { label: "Terms of Service", to: "/terms" },
+        { label: "Cookie Policy",    to: "/cookies" },
+        { label: "Security",         to: "/security" },
       ],
     },
   ];
 
   const socials = [
-    { icon: <GithubIcon />,   href: "https://github.com",   label: "GitHub" },
-    { icon: <TwitterIcon />,  href: "https://twitter.com",  label: "Twitter" },
-    { icon: <LinkedInIcon />, href: "https://linkedin.com", label: "LinkedIn" },
+    { icon: <GithubIcon />,   href: "https://github.com/rishav-kumar-2", label: "GitHub" },
+    { icon: <TwitterIcon />,  href: "https://twitter.com",               label: "Twitter" },
+    { icon: <LinkedInIcon />, href: "https://linkedin.com",              label: "LinkedIn" },
   ];
 
   return (
-    <footer
-      style={{
-        background: t.bgCard,
-        borderTop: `1px solid ${t.border}`,
-        fontFamily: "'Outfit', sans-serif",
-        marginTop: "auto",
-      }}
-    >
-      {/* Main footer content */}
-      <div
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "64px 48px 40px",
-          display: "grid",
-          gridTemplateColumns: "1.8fr 1fr 1fr 1fr",
-          gap: "40px",
-        }}
-      >
+    <footer style={{ background: t.bgCard, borderTop: `1px solid ${t.border}`, fontFamily: "'Outfit', sans-serif", marginTop: "auto" }}>
+
+      {/* Main grid */}
+      <div className="footer-grid" style={{ maxWidth: "1100px", margin: "0 auto", padding: "64px 48px 40px", display: "grid", gridTemplateColumns: "1.8fr 1fr 1fr 1fr", gap: "40px" }}>
+
         {/* Brand column */}
         <div>
           <Link to="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "9px", marginBottom: "16px" }}>
@@ -91,43 +77,15 @@ export default function Footer() {
               Note<span style={{ color: "#6366f1" }}>tube</span>
             </span>
           </Link>
-
           <p style={{ fontSize: "13px", color: t.textMuted, lineHeight: 1.75, fontWeight: 400, maxWidth: "240px", marginBottom: "24px" }}>
             Turn any YouTube video into smart, structured notes powered by Groq AI. Study smarter, not harder.
           </p>
-
-          {/* Social links */}
           <div style={{ display: "flex", gap: "8px" }}>
             {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                title={s.label}
-                style={{
-                  width: "34px",
-                  height: "34px",
-                  borderRadius: "9px",
-                  border: `1px solid ${t.border}`,
-                  background: t.bgSecondary,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: t.textSecondary,
-                  textDecoration: "none",
-                  transition: "all 0.15s",
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = t.bgHover;
-                  e.currentTarget.style.color = t.text;
-                  e.currentTarget.style.borderColor = t.text;
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = t.bgSecondary;
-                  e.currentTarget.style.color = t.textSecondary;
-                  e.currentTarget.style.borderColor = t.border;
-                }}
+              <a key={s.label} href={s.href} target="_blank" rel="noreferrer" title={s.label}
+                style={{ width: "34px", height: "34px", borderRadius: "9px", border: `1px solid ${t.border}`, background: t.bgSecondary, display: "flex", alignItems: "center", justifyContent: "center", color: t.textSecondary, textDecoration: "none", transition: "all 0.15s" }}
+                onMouseOver={(e) => { e.currentTarget.style.background = t.bgHover; e.currentTarget.style.color = t.text; e.currentTarget.style.borderColor = t.text; }}
+                onMouseOut={(e) => { e.currentTarget.style.background = t.bgSecondary; e.currentTarget.style.color = t.textSecondary; e.currentTarget.style.borderColor = t.border; }}
               >
                 {s.icon}
               </a>
@@ -138,30 +96,14 @@ export default function Footer() {
         {/* Link columns */}
         {footerLinks.map((col) => (
           <div key={col.heading}>
-            <h4
-              style={{
-                fontSize: "12px",
-                fontWeight: 700,
-                color: t.text,
-                letterSpacing: "0.6px",
-                textTransform: "uppercase",
-                marginBottom: "16px",
-              }}
-            >
+            <h4 style={{ fontSize: "12px", fontWeight: 700, color: t.text, letterSpacing: "0.6px", textTransform: "uppercase", marginBottom: "16px" }}>
               {col.heading}
             </h4>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
               {col.links.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.to}
-                    style={{
-                      fontSize: "13px",
-                      color: t.textMuted,
-                      textDecoration: "none",
-                      fontWeight: 400,
-                      transition: "color 0.15s",
-                    }}
+                  <Link to={link.to}
+                    style={{ fontSize: "13px", color: t.textMuted, textDecoration: "none", fontWeight: 400, transition: "color 0.15s" }}
                     onMouseOver={(e) => (e.currentTarget.style.color = t.text)}
                     onMouseOut={(e) => (e.currentTarget.style.color = t.textMuted)}
                   >
@@ -178,41 +120,45 @@ export default function Footer() {
       <div style={{ borderTop: `1px solid ${t.border}`, maxWidth: "1100px", margin: "0 auto" }} />
 
       {/* Bottom bar */}
-      <div
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "20px 48px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
+      <div className="footer-bottom" style={{ maxWidth: "1100px", margin: "0 auto", padding: "20px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
         <p style={{ fontSize: "12px", color: t.textMuted, fontWeight: 400, margin: 0 }}>
           © 2026 Notetube. All rights reserved.
         </p>
-        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap" }}>
           <span style={{ fontSize: "12px", color: t.textMuted, fontWeight: 400 }}>Built with</span>
-          <div style={{ display: "flex", gap: "6px" }}>
+          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
             {["React", "Express", "Groq AI", "PostgreSQL"].map((tech) => (
-              <span
-                key={tech}
-                style={{
-                  fontSize: "11px",
-                  fontWeight: 600,
-                  color: t.textSecondary,
-                  background: t.bgSecondary,
-                  border: `1px solid ${t.border}`,
-                  borderRadius: "6px",
-                  padding: "2px 8px",
-                }}
-              >
+              <span key={tech} style={{ fontSize: "11px", fontWeight: 600, color: t.textSecondary, background: t.bgSecondary, border: `1px solid ${t.border}`, borderRadius: "6px", padding: "2px 8px" }}>
                 {tech}
               </span>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Mobile styles */}
+      <style>{`
+        @media (max-width: 768px) {
+          .footer-grid {
+            grid-template-columns: 1fr 1fr !important;
+            padding: 40px 24px 24px !important;
+            gap: 32px !important;
+          }
+          .footer-grid > div:first-child {
+            grid-column: 1 / -1 !important;
+          }
+          .footer-bottom {
+            padding: 16px 24px !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }
