@@ -32,6 +32,7 @@ app.use(cors({
 
 app.use(express.json({ limit: "1mb" }));
 app.disable("x-powered-by");
+app.set("trust proxy", 1);
 
 const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
