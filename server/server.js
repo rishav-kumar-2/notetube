@@ -11,7 +11,6 @@ const videoRoutes = require("./routes/videoRoutes");
 
 const app = express();
 
-// CORS — restrict to frontend URL in production
 // CORS — allow main domain + all Vercel preview URLs
 const allowedOrigins = [
   process.env.CLIENT_URL,
@@ -34,18 +33,17 @@ app.use(cors({
 app.use(express.json({ limit: "1mb" }));
 app.disable("x-powered-by");
 
-// Rate limiting — prevent abuse
 const globalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,                  // 100 requests per window
+  windowMs: 15 * 60 * 1000,
+  max: 100,
   message: { message: "Too many requests, please try again later." },
   standardHeaders: true,
   legacyHeaders: false,
 });
 
 const summarizeLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 1 hour
-  max: 20,                   // 20 summarize requests per hour per IP
+  windowMs: 60 * 60 * 1000,
+  max: 20,
   message: { message: "Summarize limit reached. Please try again in an hour." },
   standardHeaders: true,
   legacyHeaders: false,
@@ -53,27 +51,22 @@ const summarizeLimiter = rateLimit({
 
 app.use(globalLimiter);
 
-// Health check endpoint — used by hosting providers
 app.get("/health", (req, res) => res.json({ status: "ok" }));
 app.get("/", (req, res) => res.json({ message: "Notetube API is running" }));
 
-// Routes
 app.use("/api/users", userRoutes);
-app.use("/api/videos/summarize", summarizeLimiter); // extra limit on AI endpoint
+app.use("/api/videos/summarize", summarizeLimiter);
 app.use("/api/videos", videoRoutes);
 
-// 404 handler
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
-// Global error handler — prevents unhandled crashes
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err.message);
   res.status(500).json({ message: "Internal server error" });
 });
 
-// Connect DB and start server
 const startServer = async () => {
   try {
     await connectDB();
@@ -81,9 +74,9 @@ const startServer = async () => {
     console.log("All models synced");
 
     const PORT = process.env.PORT ?? 8080;
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
-});
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on port ${PORT}`);
+    });
   } catch (error) {
     console.error("Error starting server:", error.message);
     process.exit(1);
